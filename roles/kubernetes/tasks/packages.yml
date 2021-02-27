@@ -1,0 +1,72 @@
+---
+
+- name: APT >> Packages to use https
+  ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: APT >> Install docker gpg key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  become: yes
+
+- name: APT >> Get packages architecture
+  ansible.builtin.shell: dpkg --print-architecture
+  register: output
+
+- name: APT >> Set fact dpkg_arch
+  ansible.builtin.set_fact:
+    dpkg_arch: "{{ output.stdout }}"
+
+- name: APT >> Add docker repo
+  ansible.builtin.apt_repository:
+    repo: "deb [arch={{ dpkg_arch }}] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
+    state: present
+  become: yes
+  when: not ( dpkg_arch == "armhf" and ansible_facts['distribution_release'] == "focal" )
+
+- name: APT >> Add docker repo
+  ansible.builtin.apt_repository:
+    repo: "deb [arch={{ dpkg_arch }}] https://download.docker.com/linux/debian buster stable"
+    state: present
+  become: yes
+  when: dpkg_arch == "armhf" and ansible_facts['distribution_release'] == "focal"
+
+- name: APT >> Docker packages
+  ansible.builtin.apt:
+    pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - python3-docker
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: APT >> Install google gpg key
+  ansible.builtin.apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+  become: yes
+
+- name: APT >> Add kubernetes repo
+  ansible.builtin.apt_repository:
+    repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+    state: present
+  become: yes
+
+- name: APT >> Kubernetes packages
+  ansible.builtin.apt:
+    pkg:
+      - kubelet
+    state: present
+    update_cache: yes
+  become: yes

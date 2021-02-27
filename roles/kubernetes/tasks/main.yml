@@ -1,0 +1,9 @@
+---
+
+- name: Packages
+  include: packages.yml
+  tags: packages
+
+- name: Docker
+  include: docker.yml
+  tags: docker

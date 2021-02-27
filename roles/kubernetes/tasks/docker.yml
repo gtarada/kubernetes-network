@@ -1,0 +1,9 @@
+---
+
+- name: Docker >> create hello-world container
+  community.docker.docker_container:
+    name: hello-world
+    image: hello-world
+    auto_remove: yes
+    container_default_behavior: no_defaults
+  become: yes
