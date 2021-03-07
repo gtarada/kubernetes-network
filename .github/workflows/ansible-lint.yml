@@ -11,13 +11,10 @@ on:
 
 jobs:
   verify:
-    # runs-on: ubuntu-20.04
     runs-on: self-hosted
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
       - name: ansible-lint
         uses: ./.github/actions/ansible-lint
         with:
