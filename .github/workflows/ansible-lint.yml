@@ -10,13 +10,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  verify:
+  lint:
     runs-on: self-hosted
-
     steps:
-      - uses: actions/checkout@v2
-      - name: ansible-lint
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Biuld ansible-lint
         uses: ./.github/actions/ansible-lint
-        with:
-          targets: |
-            run.yml
+      - name: Run ansible-lint
+        run: ansible-lint run.yml
