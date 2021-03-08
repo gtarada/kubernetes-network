@@ -1,5 +1,7 @@
-FROM --platform=linux/arm64/v8 cytopia/ansible-lint
+FROM ubuntu
 
 ENV ANSIBLE_HOST_KEY_CHECKING=False
+
+RUN pip3 install --upgrade ansible paramiko
 
 ENTRYPOINT ["/bin/sh", "-c"]
