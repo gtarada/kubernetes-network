@@ -1,6 +1,6 @@
 FROM ubuntu
 
-RUN apt update && apt install python3-pip
+RUN apt-get update && apt-get install -y python3-pip && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --upgrade ansible ansible-lint paramiko
 
