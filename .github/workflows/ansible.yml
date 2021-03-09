@@ -13,10 +13,8 @@ jobs:
   lint:
     runs-on: self-hosted
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Biuld ansible image and run command
-        uses: ./.github/actions/ansible
-#         run: |
-#           cat /etc/hostname
-#           ansible-lint run.yml
+      uses: actions/checkout@v2
+      uses: ./.github/actions/ansible
+      run: |
+        cat /etc/hostname
+        ansible-lint run.yml
