@@ -17,7 +17,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Biuld ansible image and run command
         uses: ./.github/actions/ansible
-        with:
-          commands:
+        run:
             - cat /etc/hostname
             - ansible-lint run.yml
