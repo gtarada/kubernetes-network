@@ -16,4 +16,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/ansible
         with:
-          command: cat /etc/hostname && ps aux && ansible-lint run.yml
+          command: ansible-lint run.yml
+  syntax-check:
+    needed: lint
+      runs-on: self-hosted
+      steps:
+        - uses: actions/checkout@v2
+        - uses: ./.github/actions/ansible
+          with:
+            command: ansible-playbook -i inventory/development --check run.yml
