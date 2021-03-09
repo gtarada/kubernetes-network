@@ -16,6 +16,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Biuld ansible-lint
-        uses: ./.github/actions/ansible-lint
+        uses: ./.github/actions/ansible
       - name: Run ansible-lint
         run: ansible-lint run.yml
