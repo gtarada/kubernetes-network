@@ -18,10 +18,10 @@ jobs:
         with:
           command: ansible-lint -v *.yml
   syntax-check:
-    needed: lint
-      runs-on: self-hosted
-      steps:
-        - uses: actions/checkout@v2
-        - uses: ./.github/actions/ansible
-          with:
-            command: ansible-playbook -i inventory/development --syntax-check *.yml
+    needs: lint
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/ansible
+        with:
+          command: ansible-playbook -i inventory/development --syntax-check *.yml
