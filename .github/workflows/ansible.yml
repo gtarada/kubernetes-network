@@ -18,4 +18,4 @@ jobs:
       - name: Biuld ansible-lint
         uses: ./.github/actions/ansible
       - name: Run ansible-lint
-        run: ansible-lint run.yml
+        run: cat /etc/hostname && ansible-lint run.yml
