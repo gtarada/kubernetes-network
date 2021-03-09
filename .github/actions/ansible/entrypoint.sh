@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/bin/sh -1
 
-sh -c $@
+sh -c $1
