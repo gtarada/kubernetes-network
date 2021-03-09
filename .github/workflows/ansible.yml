@@ -15,7 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Biuld ansible-lint
+      - name: Biuld ansible image and run command
         uses: ./.github/actions/ansible
-      - name: Run ansible-lint
-        run: cat /etc/hostname && ansible-lint run.yml
+        with: ansible-lint run.yml
