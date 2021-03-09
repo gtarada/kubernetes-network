@@ -2,8 +2,6 @@ name: 'Ansible'
 inputs:
   command:
     required: true
-outputs:
-  command_output:
 runs:
   using: 'docker'
   image: 'Dockerfile'
