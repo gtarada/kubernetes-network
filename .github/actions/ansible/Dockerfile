@@ -9,4 +9,6 @@ RUN pip3 install --upgrade ansible ansible-lint paramiko
 
 ENV ANSIBLE_HOST_KEY_CHECKING=False
 
-ENTRYPOINT ["/bin/sh"]
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
