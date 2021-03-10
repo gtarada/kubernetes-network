@@ -1,7 +1,7 @@
 ---
 
 - name: APT >> Packages to use https
-  ansible.builtin.apt1:
+  ansible.builtin.apt:
     pkg:
       - apt-transport-https
       - ca-certificates
